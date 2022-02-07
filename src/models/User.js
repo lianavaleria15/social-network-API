@@ -1,11 +1,8 @@
 //import schema & model from mongoose
-const { Schema, model, Mongoose } = require("mongoose");
+const { Schema, model, mongoose } = require("mongoose");
 
 //import mongoose validate email library
-const mongooseEmail = require("mongoose-type-email");
-
-//import thought model
-const thoughts = require("./Thought");
+require("mongoose-type-email");
 
 //define user schema
 const userSchema = {
@@ -17,28 +14,32 @@ const userSchema = {
   },
 
   email: {
-    type: mongooseEmail.SchemaTypes.Email,
+    type: Schema.Types.Email,
     required: true,
     unique: true,
   },
 
   //thoughts (array of _id values referencing the though model)
-  thoughts: [thoughts],
+  thoughts: [{ type: Schema.Types.ObjectId, ref: "Thought" }],
 
   //friends (array of _id values referencing the user model - self-reference)
   friends: [
     {
-      _id: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
-
-  //schema setting: create a virtual `friendCount` that retrieves user's friends array field length on query
 };
 
 //create new student schema
 const schema = new Schema(userSchema);
 
-const User = model("user", schema);
+//schema setting: create a virtual `friendCount` that retrieves user's friends array field length on query
+schema.virtual("friendCount").get(function () {
+  return this.friends.length;
+});
+
+const User = model("User", schema);
 
 //export user model
 module.exports = User;

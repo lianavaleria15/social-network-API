@@ -5,6 +5,7 @@ const { format } = require("date-fns");
 //get current time stamp
 const now = new Date();
 
+//define thought schema
 const thoughtSchema = {
   thoughtText: {
     type: String,
@@ -13,12 +14,10 @@ const thoughtSchema = {
     maxLength: 280,
   },
 
-  //   createdAt(date, default value to current timestamp, getter method to format the timestamp on query)
   createdAt: {
     type: Date,
-    default: format(now, "dd-MM-yyyy HH:mm"),
+    get: formatTime,
   },
-
   //username (user that created the thought, string, required)
   username: {
     type: String,
@@ -26,22 +25,20 @@ const thoughtSchema = {
   },
 
   //reactions (array of nested documents created with the reactionSchema)
-  reactions: [],
-
-  //schema setting: create a virtual `reactionCount` that retrieves user's friends array field length on query
-  reactionCount: {},
+  reactions: [{ type: Schema.Types.ObjectId, ref: "reactionSchema" }],
 };
 
-//create reaction schema
-//reactionId (Mongoose Object Id data type); default value set to new ObjectId
-//reactionBody(string, required, max 280 characters)
-//username (string, required)
-//createdAt(date, default value to current time stamp, getter method to format the timestamp on query)
+const formatTime = (date) => {
+  return format(date, "dd-MM-yyyy HH:mm");
+};
 
-//define thought schema
+//schema setting: create a virtual `reactionCount` that retrieves user's friends array field length on query
+schema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
 //create new thought schema
-const schema = new Schema(thoughtSchema);
+const schema = new Schema(thoughtSchema, { timestamps: true });
 
 //export user model
 module.exports = schema;
