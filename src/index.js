@@ -10,8 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
+const { format } = require("date-fns");
 
 const init = async () => {
+  const now = new Date();
+  console.log(format(now, "dd-MM-yyyy HH:mm"));
   try {
     //connect to db
     await mongoose.connect("mongodb://localhost:27017/socialNetworkDB", {
