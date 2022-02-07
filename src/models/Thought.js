@@ -2,8 +2,10 @@
 const { Schema, model } = require("mongoose");
 const { format } = require("date-fns");
 
-//get current time stamp
-const now = new Date();
+//util function to format time for created at
+const formatTime = (date) => {
+  return format(date, "dd-MM-yyyy HH:mm");
+};
 
 //define thought schema
 const thoughtSchema = {
@@ -18,6 +20,7 @@ const thoughtSchema = {
     type: Date,
     get: formatTime,
   },
+
   //username (user that created the thought, string, required)
   username: {
     type: String,
@@ -26,10 +29,6 @@ const thoughtSchema = {
 
   //reactions (array of nested documents created with the reactionSchema)
   reactions: [{ type: Schema.Types.ObjectId, ref: "reactionSchema" }],
-};
-
-const formatTime = (date) => {
-  return format(date, "dd-MM-yyyy HH:mm");
 };
 
 //create new thought schema
