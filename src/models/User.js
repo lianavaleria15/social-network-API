@@ -2,7 +2,7 @@
 const { Schema, model, Mongoose } = require("mongoose");
 
 //import mongoose validate email library
-const MongooseEmail = require("mongoose-type-email");
+const mongooseEmail = require("mongoose-type-email");
 
 //import thought model
 const thoughts = require("./Thought");
@@ -17,7 +17,7 @@ const userSchema = {
   },
 
   email: {
-    type: MongooseEmail.SchemaTypes.Email,
+    type: mongooseEmail.SchemaTypes.Email,
     required: true,
     unique: true,
   },

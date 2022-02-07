@@ -16,7 +16,7 @@ const thoughtSchema = {
   //   createdAt(date, default value to current timestamp, getter method to format the timestamp on query)
   createdAt: {
     type: Date,
-    default: format(now, "dd-MM-YYYY HH:mm"),
+    default: format(now, "dd-MM-yyyy HH:mm"),
   },
 
   //username (user that created the thought, string, required)
