@@ -3,10 +3,30 @@ const { format } = require("date-fns");
 
 //create reaction schema
 const reactionSchema = {
-  reactionBody: { type: String, required: true, maxLength: 280 },
-  username: { type: String, required: true },
+  reactionBody: {
+    type: String,
+    required: true,
+    maxLength: 280,
+  },
+
+  username: {
+    type: String,
+    required: true,
+  },
+
+  createdAt: {
+    type: Date,
+    get: formatTime,
+  },
 };
-//reactionId (Mongoose Object Id data type); default value set to new ObjectId
-//reactionBody(string, required, max 280 characters)
-//username (string, required)
-//createdAt(date, default value to current time stamp, getter method to format the timestamp on query)
+
+//format createdAt data
+const formatTime = (date) => {
+  return format(date, "dd-MM-yyyy HH:mm");
+};
+
+//create new reaction schema
+const schema = new Schema(reactionSchema, { timestamp: true });
+
+//export reaction schema
+module.exports = schema;

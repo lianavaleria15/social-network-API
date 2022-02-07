@@ -1,5 +1,5 @@
 //import schema & moment js from mongoose
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const { format } = require("date-fns");
 
 //get current time stamp
@@ -32,13 +32,15 @@ const formatTime = (date) => {
   return format(date, "dd-MM-yyyy HH:mm");
 };
 
+//create new thought schema
+const schema = new Schema(thoughtSchema, { timestamps: true });
+
 //schema setting: create a virtual `reactionCount` that retrieves user's friends array field length on query
 schema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-//create new thought schema
-const schema = new Schema(thoughtSchema, { timestamps: true });
+const Thought = model("Thought", schema);
 
 //export user model
-module.exports = schema;
+module.exports = Thought;
