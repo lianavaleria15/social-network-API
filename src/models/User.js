@@ -1,8 +1,5 @@
 //import schema & model from mongoose
-const { Schema, model, mongoose } = require("mongoose");
-
-//import mongoose validate email library
-require("mongoose-type-email");
+const { Schema, model } = require("mongoose");
 
 //define user schema
 const userSchema = {
@@ -17,6 +14,7 @@ const userSchema = {
     type: Schema.Types.Email,
     required: true,
     unique: true,
+    trim: true,
   },
 
   //thoughts (array of _id values referencing the though model)

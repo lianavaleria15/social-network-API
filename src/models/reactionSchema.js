@@ -1,8 +1,14 @@
 const { Schema } = require("mongoose");
 const { format } = require("date-fns");
 
+//format createdAt data
+const formatTime = (date) => {
+  return format(date, "dd-MM-yyyy HH:mm");
+};
+
 //create reaction schema
 const reactionSchema = {
+  reactionId: {},
   reactionBody: {
     type: String,
     required: true,
@@ -18,11 +24,6 @@ const reactionSchema = {
     type: Date,
     get: formatTime,
   },
-};
-
-//format createdAt data
-const formatTime = (date) => {
-  return format(date, "dd-MM-yyyy HH:mm");
 };
 
 //create new reaction schema
