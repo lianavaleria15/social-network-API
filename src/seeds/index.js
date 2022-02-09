@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
 //import models
-const { User } = require("../models/User");
-const { Thought } = require("../models/Thought");
+const { User, Thought } = require("../models");
 
 //import seed data
 const user = require("./data/User");
@@ -19,7 +18,13 @@ const init = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log("[INFO]: Social media database connect successful");
+    console.log("[INFO]: Social media database connection successful");
+
+    //seed users
+    await User.deleteMany({});
+    await User.insertMany(user);
+
+    console.log("[INFO]: Users successfully seeded");
   } catch (error) {
     console.log(
       `[ERROR]: Social media database connection failed | ${error.message}`
