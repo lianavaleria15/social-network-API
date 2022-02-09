@@ -11,10 +11,11 @@ const userSchema = {
   },
 
   email: {
-    type: Schema.Types.Email,
+    type: String,
     required: true,
     unique: true,
     trim: true,
+    match: /.+\@.+\..+/,
   },
 
   //thoughts (array of _id values referencing the though model)
