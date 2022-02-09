@@ -6,7 +6,6 @@ const { User, Thought } = require("../models");
 //import seed data
 const user = require("./data/User");
 const thought = require("./data/Thought");
-const reaction = require("./data/Reaction");
 
 //create init function of start of server
 
@@ -31,6 +30,33 @@ const init = async () => {
     await Thought.insertMany(thought);
 
     console.log("[INFO]: Thoughts successfully seeded");
+
+    //get all users from DB
+    const usersFromDb = await User.find({});
+
+    //get all thoughts from DB
+    const thoughtsFromDb = await Thought.find({});
+
+    //map through thoughts; link thought to specific user
+    thoughtsFromDb.map(async (thought) => {
+      //get each thought's username
+      const thoughtUsername = thought.username;
+
+      //find user in userDB where thought userId matches user id
+      const thoughtUser = usersFromDb.find((user) => {
+        return user.username === thoughtUsername;
+      });
+
+      const userId = thoughtUser._id.toString();
+      console.log(userId);
+      const thoughtId = thought._id;
+
+      thoughtUser.thoughts.push(thoughtId.toString());
+
+      await User.findByIdAndUpdate(userId, { ...thoughtUser });
+    });
+
+    await mongoose.disconnect();
   } catch (error) {
     console.log(
       `[ERROR]: Social media database connection failed | ${error.message}`
