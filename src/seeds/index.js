@@ -25,6 +25,12 @@ const init = async () => {
     await User.insertMany(user);
 
     console.log("[INFO]: Users successfully seeded");
+
+    //seed thoughts
+    await Thought.deleteMany({});
+    await Thought.insertMany(thought);
+
+    console.log("[INFO]: Thoughts successfully seeded");
   } catch (error) {
     console.log(
       `[ERROR]: Social media database connection failed | ${error.message}`

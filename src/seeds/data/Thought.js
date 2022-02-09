@@ -1,4 +1,4 @@
-const Thought = [
+const thought = [
   {
     thoughtText: "5 A.M club with a cup of coffee and GraphQL",
     username: "fantastic_fox",
@@ -32,4 +32,4 @@ const Thought = [
   },
 ];
 
-module.exports = { Thought };
+module.exports = thought;
