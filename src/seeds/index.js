@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const { User, Thought } = require("../models");
 
 //import seed data
-const user = require("./data/User");
-const thought = require("./data/Thought");
+const users = require("./data/User");
+const thoughts = require("./data/Thought");
 
 //create init function of start of server
 
@@ -21,13 +21,13 @@ const init = async () => {
 
     //seed users
     await User.deleteMany({});
-    await User.insertMany(user);
+    await User.insertMany(users);
 
     console.log("[INFO]: Users successfully seeded");
 
     //seed thoughts
     await Thought.deleteMany({});
-    await Thought.insertMany(thought);
+    await Thought.insertMany(thoughts);
 
     console.log("[INFO]: Thoughts successfully seeded");
 
@@ -37,24 +37,20 @@ const init = async () => {
     //get all thoughts from DB
     const thoughtsFromDb = await Thought.find({});
 
-    //map through thoughts; link thought to specific user
-    thoughtsFromDb.map(async (thought) => {
+    // map through thoughts; link thought to specific user
+    const promises = thoughtsFromDb.map(async (thought) => {
       //get each thought's username
-      const thoughtUsername = thought.username;
+      const username = thought.username;
 
       //find user in userDB where thought userId matches user id
-      const thoughtUser = usersFromDb.find((user) => {
-        return user.username === thoughtUsername;
-      });
+      const user = usersFromDb.find((user) => user.username === username);
 
-      const userId = thoughtUser._id.toString();
-      console.log(userId);
-      const thoughtId = thought._id;
+      user.thoughts.push(thought._id.toString());
 
-      thoughtUser.thoughts.push(thoughtId.toString());
-
-      await User.findByIdAndUpdate(userId, { ...thoughtUser });
+      await User.findByIdAndUpdate(user._id, { ...user });
     });
+
+    await Promise.all(promises);
 
     await mongoose.disconnect();
   } catch (error) {

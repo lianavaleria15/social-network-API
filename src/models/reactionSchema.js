@@ -8,7 +8,9 @@ const formatTime = (date) => {
 
 //create reaction schema
 const reactionSchema = {
-  reactionId: {},
+  reactionId: {
+    type: Schema.Types.ObjectId,
+  },
   reactionBody: {
     type: String,
     required: true,

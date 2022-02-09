@@ -2,6 +2,16 @@ const thought = [
   {
     thoughtText: "5 A.M club with a cup of coffee and GraphQL",
     username: "fantastic_fox",
+    reactions: [
+      {
+        reactionBody: "foo bar",
+        username: "penny.finn",
+      },
+      {
+        reactionBody: "biz baz",
+        username: "scott_vader97",
+      },
+    ],
   },
   {
     thoughtText: "React project presentation today! Wish me luck folks",
