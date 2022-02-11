@@ -21,7 +21,7 @@ const thoughtSchema = {
   createdAt: {
     type: Date,
     get: formatTime,
-    default: Date.now,
+    default: formatTime(Date.now()),
   },
 
   //username (user that created the thought, string, required)

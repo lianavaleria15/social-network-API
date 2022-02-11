@@ -29,9 +29,22 @@ const getUserById = async (req, res) => {
   }
 };
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   try {
-  } catch (error) {}
+    //get user params from req body
+    const { username, email } = req.body;
+
+    //create new user
+    const newUser = await User.create({ username, email });
+
+    return res.json({ success: true, data: newUser });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to create new user | ${error.message}`);
+
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to create new user" });
+  }
 };
 
 const updateUser = (req, res) => {
