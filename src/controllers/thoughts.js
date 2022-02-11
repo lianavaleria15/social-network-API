@@ -49,8 +49,26 @@ const createThought = async (req, res) => {
   }
 };
 
-const updateThought = (req, res) => {
-  console.log("get thoughts");
+const updateThought = async (req, res) => {
+  try {
+    //get id of thought to update
+    const { userId } = req.params;
+
+    //get fields to update from req
+    const { thoughtText } = req.body;
+
+    //update thought
+    const thoughtToUpdate = await Thought.findByIdAndUpdate(userId, {
+      thoughtText,
+    });
+
+    return res.json({ success: "Thought successfully updated" });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to update existent thought| ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to update existent thought" });
+  }
 };
 
 const deleteThought = (req, res) => {
