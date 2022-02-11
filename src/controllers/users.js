@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const user = require("../seeds/data/User");
 
 const getUsers = async (req, res) => {
   try {
@@ -70,9 +71,20 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   try {
-  } catch (error) {}
+    //get id of user to delete
+    const { userId } = req.params;
+
+    //delete user
+    const userToDelete = await User.findByIdAndDelete(userId);
+    return res.json({ success: "User successfully deleted" });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to delete existent user | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to delete existent user" });
+  }
 };
 
 module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };
