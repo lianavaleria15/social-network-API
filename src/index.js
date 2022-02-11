@@ -18,7 +18,7 @@ const init = async () => {
   try {
     //connect to db
     await mongoose.connect("mongodb://localhost:27017/socialNetworkDB", {
-      userNewUrlParser: true,
+      // userNewUrlParser: true,
       useUnifiedTopology: true,
     });
 

@@ -1,11 +1,31 @@
-const { Thought } = require("../models/Thought");
+const { Thought } = require("../models");
 
-const getThoughts = (req, res) => {
-  console.log("get thoughts");
+const getThoughts = async (req, res) => {
+  try {
+    const thoughts = await Thought.find({});
+    return res.json({
+      success: true,
+      data: thoughts,
+    });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get all thoughts | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to get all thoughts" });
+  }
 };
 
-const getThoughtById = (req, res) => {
-  console.log("get thoughts");
+const getThoughtById = async (req, res) => {
+  try {
+    const { thoughtId } = req.params;
+    const thought = await User.findById(thoughtId);
+    return res.json({ success: true, data: thought });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get thought by id | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to get thought by id" });
+  }
 };
 
 const createThought = (req, res) => {

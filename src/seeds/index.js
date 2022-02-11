@@ -52,6 +52,17 @@ const init = async () => {
 
     await Promise.all(promises);
 
+    // //seed random friends into users
+    // usersFromDb.forEach((user) => {
+    //   //get user id
+    //   const userId = user._id.toString();
+
+    //   //assign random friend
+    //   const randomFriend = users[Math.floor(Math.random() * users.length)];
+
+    //   // user.friends.push(randomFriend);
+    // });
+
     await mongoose.disconnect();
   } catch (error) {
     console.log(

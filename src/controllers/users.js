@@ -1,23 +1,47 @@
-const { User } = require("../models/User");
+const { User } = require("../models");
 
-const getUsers = (req, res) => {
-  console.log("get users");
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    return res.json({
+      success: true,
+      message: "Get all users request successful",
+      data: users,
+    });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get all users | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to get all users" });
+  }
 };
 
-const getUserById = (req, res) => {
-  console.log("get user by id");
+const getUserById = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    return res.json({ success: true, data: user });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get user by id | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to get user by id" });
+  }
 };
 
 const createUser = (req, res) => {
-  console.log("create user");
+  try {
+  } catch (error) {}
 };
 
 const updateUser = (req, res) => {
-  console.log("update user");
+  try {
+  } catch (error) {}
 };
 
 const deleteUser = (req, res) => {
-  console.log("delete user");
+  try {
+  } catch (error) {}
 };
 
 module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };
