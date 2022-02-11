@@ -4,7 +4,7 @@ const getThoughts = async (req, res) => {
   try {
     const thoughts = await Thought.find({});
     return res.json({
-      success: true,
+      success: "Get all thoughts request successful",
       data: thoughts,
     });
   } catch (error) {
@@ -18,8 +18,8 @@ const getThoughts = async (req, res) => {
 const getThoughtById = async (req, res) => {
   try {
     const { thoughtId } = req.params;
-    const thought = await User.findById(thoughtId);
-    return res.json({ success: true, data: thought });
+    const thought = await Thought.findById(thoughtId);
+    return res.json({ success: "Get thought by id request successful" });
   } catch (error) {
     console.log(`[ERROR]: Failed to get thought by id | ${error.message}`);
     return res
@@ -58,7 +58,7 @@ const updateThought = async (req, res) => {
     const { thoughtText } = req.body;
 
     //update thought
-    const thoughtToUpdate = await Thought.findByIdAndUpdate(userId, {
+    await Thought.findByIdAndUpdate(userId, {
       thoughtText,
     });
 
@@ -71,8 +71,24 @@ const updateThought = async (req, res) => {
   }
 };
 
-const deleteThought = (req, res) => {
-  console.log("get thoughts");
+const deleteThought = async (req, res) => {
+  try {
+    //get id of user to delete
+    const { thoughtId } = req.params;
+
+    //delete user
+    await Thought.findByIdAndDelete(thoughtId);
+
+    return res.json({ success: "Thought successfully deleted" });
+  } catch (error) {
+    console.log(
+      `[ERROR]: Failed to delete existent thought | ${error.message}`
+    );
+
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to delete existent thought" });
+  }
 };
 
 module.exports = {
