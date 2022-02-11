@@ -77,7 +77,7 @@ const deleteUser = async (req, res) => {
     const { userId } = req.params;
 
     //delete user
-    const userToDelete = await User.findByIdAndDelete(userId);
+    await User.findByIdAndDelete(userId);
     return res.json({ success: "User successfully deleted" });
   } catch (error) {
     console.log(`[ERROR]: Failed to delete existent user | ${error.message}`);
