@@ -47,9 +47,27 @@ const createUser = async (req, res) => {
   }
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
   try {
-  } catch (error) {}
+    //get id of user to update
+    const { userId } = req.params;
+
+    //get fields to update from req
+    const { username, email } = req.body;
+
+    //update user
+    const userToUpdate = await User.findByIdAndUpdate(userId, {
+      username,
+      email,
+    });
+
+    return res.json({ success: true, data: userToUpdate });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to update existent user | ${error.message}`);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to update existent user" });
+  }
 };
 
 const deleteUser = (req, res) => {
