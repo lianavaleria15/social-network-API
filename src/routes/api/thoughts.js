@@ -1,4 +1,6 @@
 const { Router } = require("express");
+
+//import controllers
 const {
   getThoughts,
   getThoughtById,
@@ -7,7 +9,8 @@ const {
   deleteThought,
 } = require("../../controllers/thoughts");
 
-//import controllers
+//import reactions route
+const reactions = require("./reactions");
 
 const router = Router();
 
@@ -21,13 +24,12 @@ router.get("/:thoughtId", getThoughtById);
 router.post("/", createThought);
 
 //update a thought by id
-router.put("/:userId", updateThought);
+router.put("/:thoughtId", updateThought);
 
 //remove a thought by id
-router.delete("/:userId", deleteThought);
+router.delete("/:thoughtId", deleteThought);
 
-//create a reaction stored in a single thought array
-
+router.use("/:thoughtId/reactions", reactions);
 //delete a reaction from reactions array by the reaction id value
 
 module.exports = router;
