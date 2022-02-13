@@ -34,7 +34,7 @@ const deleteFriend = async (req, res) => {
     const data = await User.findByIdAndUpdate(
       userId,
       {
-        $pull: { friends: { _id: friendId } },
+        $pull: { friends: { $in: [friendId] } },
       },
       { new: true }
     );

@@ -3,7 +3,7 @@ const { addFriend, deleteFriend } = require("../../controllers/friends");
 
 const router = Router({ mergeParams: true });
 
-router.put("/", addFriend);
+router.post("/", addFriend);
 
 router.delete("/:friendId", deleteFriend);
 
