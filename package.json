@@ -1,0 +1,31 @@
+{
+  "name": "social-network-API",
+  "version": "1.0.0",
+  "description": "An application builds an API for a social network where users can share their thoughts, react to friends' thougths and create a friend list. It uses Express.js.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seeds/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lianavaleria15/social-network-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lianavaleria15/social-network-API/issues"
+  },
+  "homepage": "https://github.com/lianavaleria15/social-network-API#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "date-fns": "^2.28.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0",
+    "mongoose-type-email": "^1.1.2"
+  }
+}
