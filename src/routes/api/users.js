@@ -9,6 +9,8 @@ const {
   deleteUser,
 } = require("../../controllers/users");
 
+const friends = require("./friends");
+
 const router = Router();
 
 //get all users
@@ -25,5 +27,7 @@ router.put("/:userId", updateUser);
 
 //delete a user by id
 router.delete("/:userId", deleteUser);
+
+router.use("/:userId/friends", friends);
 
 module.exports = router;
