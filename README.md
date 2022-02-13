@@ -28,7 +28,8 @@ A Postman collection file contains the seeded data.
 
 ## Demo
 
-Click [here](#) to watch the demo of the application.
+Click [here](https://drive.google.com/file/d/13CYqop9OyAED9ZENxZVzFYK9P-SrVL59/view) to watch the demo for `users` and `thoughts` routes.
+Click [here](https://drive.google.com/file/d/1xzO68pYh-APUTBENMmBKZLyUNbOhrKIu/view) to watch the demo for `reactions` and `friends` routes.
 
 ## User Story
 
