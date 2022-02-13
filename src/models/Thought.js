@@ -21,7 +21,7 @@ const thoughtSchema = {
   createdAt: {
     type: Date,
     get: formatTime,
-    default: formatTime(Date.now()),
+    default: Date.now,
   },
 
   //username (user that created the thought, string, required)
@@ -35,7 +35,9 @@ const thoughtSchema = {
 };
 
 //create new thought schema
-const schema = new Schema(thoughtSchema, { timestamps: true });
+const schema = new Schema(thoughtSchema, {
+  toJSON: { getters: true },
+});
 
 //schema setting: create a virtual `reactionCount` that retrieves user's friends array field length on query
 schema.virtual("reactionCount").get(function () {

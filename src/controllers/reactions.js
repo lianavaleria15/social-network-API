@@ -4,29 +4,24 @@ const { Thought } = require("../models");
 //create a reaction stored in a single thought array
 const createReactionForThought = async (req, res) => {
   try {
-    //get reaction data from req body
-    const { reactionBody, username } = req.body;
-
     //get thought id from req params
-    const thoughtId = req.params;
-
-    //get all thoughts from DB
-    const thoughtsFromDb = await Thought.find({});
-
-    //find thought in thoughts array where id matches current id
-    const thought = thoughtsFromDb.find((thought) => (thought._id = thoughtId));
-
-    //push new reaction in reactions array for the current thought, this doesn't work
-    thought.reactions.push({ reactionBody, username });
+    const { thoughtId } = req.params;
 
     //push new reaction inside the reactions array for that thought id
-    await Thought.findByIdAndUpdate(thought._id, { ...thought });
+    const data = await Thought.findByIdAndUpdate(
+      thoughtId,
+      {
+        $push: { reactions: { ...req.body } },
+      },
+      { new: true }
+    );
 
-    return res.json({ success: "New reaction successfully added" });
+    return res.json({ success: true, data });
   } catch (error) {
     console.log(
       `[ERROR]: Failed to create a new reaction for present thought | ${error.message}`
     );
+
     return res.status(500).json({
       success: false,
       error: "Failed to create a new reaction for present thought",
@@ -35,8 +30,29 @@ const createReactionForThought = async (req, res) => {
 };
 
 //delete a reaction from reactions array by the reaction id value
-const deleteReactionByThought = (req, res) => {
-  console.log("delete reaction");
+const deleteReactionByThought = async (req, res) => {
+  try {
+    const { thoughtId, reactionId } = req.params;
+
+    const data = await Thought.findByIdAndUpdate(
+      thoughtId,
+      {
+        $pull: { reactions: { _id: reactionId } },
+      },
+      { new: true }
+    );
+
+    return res.json({ success: true, data });
+  } catch (error) {
+    console.log(
+      `[ERROR]: Failed to delete reaction for present thought | ${error.message}`
+    );
+
+    return res.status(500).json({
+      success: false,
+      error: "Failed to delete reaction for present thought",
+    });
+  }
 };
 
 module.exports = { createReactionForThought, deleteReactionByThought };

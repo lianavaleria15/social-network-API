@@ -3,11 +3,10 @@ const user = require("../seeds/data/User");
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const data = await User.find({}).populate("thoughts").populate("friends");
     return res.json({
       success: true,
-      message: "Get all users request successful",
-      data: users,
+      data,
     });
   } catch (error) {
     console.log(`[ERROR]: Failed to get all users | ${error.message}`);
@@ -20,8 +19,10 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
-    const user = await User.findById(userId);
-    return res.json({ success: true, data: user });
+    const data = await User.findById(userId)
+      .populate("thoughts")
+      .populate("friends");
+    return res.json({ success: true, data });
   } catch (error) {
     console.log(`[ERROR]: Failed to get user by id | ${error.message}`);
     return res
@@ -36,9 +37,9 @@ const createUser = async (req, res) => {
     const { username, email } = req.body;
 
     //create new user
-    const newUser = await User.create({ username, email });
+    const data = await User.create({ username, email });
 
-    return res.json({ success: true, data: newUser });
+    return res.json({ success: true, data });
   } catch (error) {
     console.log(`[ERROR]: Failed to create new user | ${error.message}`);
 
@@ -53,16 +54,16 @@ const updateUser = async (req, res) => {
     //get id of user to update
     const { userId } = req.params;
 
-    //get fields to update from req
-    const { username, email } = req.body;
-
     //update user
-    const userToUpdate = await User.findByIdAndUpdate(userId, {
-      username,
-      email,
-    });
+    const data = await User.findByIdAndUpdate(
+      userId,
+      {
+        ...req.body,
+      },
+      { new: true }
+    );
 
-    return res.json({ success: true, data: userToUpdate });
+    return res.json({ success: true, data });
   } catch (error) {
     console.log(`[ERROR]: Failed to update existent user | ${error.message}`);
     return res
@@ -77,8 +78,8 @@ const deleteUser = async (req, res) => {
     const { userId } = req.params;
 
     //delete user
-    await User.findByIdAndDelete(userId);
-    return res.json({ success: "User successfully deleted" });
+    const data = await User.findByIdAndDelete(userId);
+    return res.json({ success: true, data });
   } catch (error) {
     console.log(`[ERROR]: Failed to delete existent user | ${error.message}`);
     return res
