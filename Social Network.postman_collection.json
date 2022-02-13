@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "64c01b6f-13a7-44b2-a09a-42017d858702",
+		"name": "Social Network",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/6206743dd4d9bf877ac2deb7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"6206743dd4d9bf877ac2deb7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jack_storm\",\r\n    \"email\":\"jack_storm@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"fantastic.fox10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/6206743dd4d9bf877ac2deb6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"6206743dd4d9bf877ac2deb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/62092912c8404cca65f8e81d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"62092912c8404cca65f8e81d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "thoughts",
+			"item": [
+				{
+					"name": "thoughts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thought",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts/6206743dd4d9bf877ac2dec1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts",
+								"6206743dd4d9bf877ac2dec1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thought",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thoughtText\": \"Hi all, new to this platform\",\r\n    \"username\": \"the.bear.techie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thought",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thoughtText\": \"Any cv writing tips?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts/620900e81aff4e96d3f0da19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts",
+								"620900e81aff4e96d3f0da19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thought",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts/6206743dd4d9bf877ac2dec5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts",
+								"6206743dd4d9bf877ac2dec5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reactions",
+			"item": [
+				{
+					"name": "reaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reactionBody\": \"You gonna smash it!\",\r\n    \"username\": \"penny.finn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts/6206743dd4d9bf877ac2dec1/reactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts",
+								"6206743dd4d9bf877ac2dec1",
+								"reactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reactionBody\": \"good luck\",\r\n    \"username\": \"penny.finn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/thoughts/6206743dd4d9bf877ac2dec1/reactions/6208fdf5942010f80982a8d9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"thoughts",
+								"6206743dd4d9bf877ac2dec1",
+								"reactions",
+								"6208fdf5942010f80982a8d9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "friends",
+			"item": [
+				{
+					"name": "friend",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"_id\":\"6206743dd4d9bf877ac2deb9\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/62067b6c4c94009ca686e6d6/friends/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"62067b6c4c94009ca686e6d6",
+								"friends",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "friend",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/6206743dd4d9bf877ac2deb6/friends/6206743dd4d9bf877ac2deb9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"6206743dd4d9bf877ac2deb6",
+								"friends",
+								"6206743dd4d9bf877ac2deb9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
